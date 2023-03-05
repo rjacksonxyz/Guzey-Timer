@@ -23,8 +23,6 @@ import (
 //	- every three hours (at 12-3-6-9) the :05-:30 work cycle is substituted for a break, which lasts 35 minutes.
 
 var phaseColor string = phases.WORK_COLOR
-var phaseColors map[phases.Phase]string = map[phases.Phase]string{phases.WORK: "green", phases.BREAK: "red"}
-var opposite map[phases.Phase]phases.Phase = map[phases.Phase]phases.Phase{phases.WORK: phases.BREAK, phases.BREAK: phases.WORK}
 
 func main() {
 	var end time.Time
@@ -38,10 +36,10 @@ func main() {
 				continue
 			}
 			// change display info
-			phaseColor = phaseColors[pt.Phase()]
+			phaseColor = pt.Color()
 			end = pt.EndingTime()
 			currentPhase = pt.Phase()
-			nextPhase = pt.State.NextPhase
+			nextPhase = pt.NextPhase()
 			// announce start of phase
 			go func() {
 				cmd := exec.Command("afplay", pt.MP3()) // clears the scrollback buffer as well as the screen.

@@ -102,6 +102,14 @@ func (s *PhaseTimer) MP3() string {
 	return s.State.Mp3
 }
 
+func (s *PhaseTimer) Color() string {
+	return s.State.Color
+}
+
+func (s *PhaseTimer) NextPhase() Phase {
+	return s.State.NextPhase
+}
+
 func NewLongBreak() *PhaseTimer {
 	return NewPhaseTimer(LONG_BREAK_DURATION, BREAK, BREAK_COLOR, BREAK_MP3_PATH, WORK)
 }
